@@ -58,9 +58,3 @@ Week 3: Graphics
 •	7 layers of graphics: Theme
 
 Week 4:
-
-
-# Intro2R
-# Intro2R
-# Intro2R
-# Introduction2R
