@@ -1,0 +1,567 @@
+---
+title: "Basic Structure"
+author: "Marta Fajlhauer"
+date: "15 October 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+### Installation process: 
+Install R: http://www.r-project.org
+Install RStudio: http://www.rstudio.com
+
+
+# Some infos before we will kick off:
+
+This programming workshop wouldn't take place if not a contribution of Dr Jeromy Anglim from Deakin University.
+He shared the resources with all members of The R project for Statistical Computing. I used some elements of his workshop here.
+This material is used for programming workshop in R for students on the Queen Mary University of London provided by RLadies member (student at QMUL) 
+Thank you. 
+
+### What is R and Rstudio??
+R is open source programming widely used by statisticians and data miners for developing data analysis.
+The name R origin from the fact that two creators of R where Ross Ihaka and Robert Gentleman and that R is build upon statistical programme S. And you know R comes before S, isn't it? 
+
+
+The most popular interface for R language is RStudio. 
+
+
+"R is a free software environment for statistical computing and graphics" - http://www.r-project.org
+
+
+It is a full-featured statistical analysis package (e.g., like SAS, Stata, SPSS, etc.) that allows you to:
+Import and export data in a wide range of formats
+1. Manipulate data
+2. Analyse data
+3. Graphically represent data
+
+### Advantages of R:
+* It is free to use
+* It is open source: it encourages open collaboration. Eveyrone with sufficient skills can create a package to develop furter R. 
+* It has a huge library of packages available to run every form of analysis. 
+* R is flexible
+* R has a nice visualisation graphics that we will see later in the course.
+
+### Challenges of using R
+You need to learn programming! ;p It is also fun
+
+#### Introduction to RStudio:
+
+1. File: 
++ Knit document: On more advanced level allows to combine text, R code and Code reuslts into a document like this: 
++ Compile report: Another way of writing a report but I prefer to knit document. 
++ Reopen with encoding: from techopedia: https://www.techopedia.com/definition/948/encoding
+
+
+Encoding is the process of converting data into a format required for a number of information processing needs, including:
+* Program compiling and execution
+* Data transmission, storage and compression/decompression
+* Application data processing, such as file conversion
+
+
+Encoding can have two meanings:
+* In computer technology, encoding is the process of applying a specific code, such as letters, symbols and numbers, to data for conversion into an equivalent cipher.
+* In electronics, encoding refers to analog to digital conversion.
+
+
+2. Code:
+
++ Show document ootline: used with R markdown
++ Show diagnostics: Shows different chapters of this document in R. 
++ Extract function: Used in spatial analysis
++ Rename in Scope: This feature makes it easy to rename all instances of a variable
++ Insert Roxygen Skeleton: Showing a full code for that goes behind your panel. For more information go here: https://stackoverflow.com/questions/10825058/can-rstudio-automatically-generate-an-roxygen-template-for-a-function
++ Source with Echo: Source runs the program. Source with Echo runs the program as if you had copied each line into the console, so you see the input followed by the output.
+
+
+3. Session
+
++ Setup working directory: All of your work done in R will be saved in the current working directory. 
+To setup directory on the beginning of a project fo to file - open new project - ad in pop up window choose directory
+To change directory during the project use Session - set working directory
+
+4. Source: It is a place where you can write long codes, projects or documents like this and then run the part of this long document in a console
+Check what will happen if you will do 2+2 and Enter
+5. Console: It is a place where you run a code and you can see output
+6. Environment: all of your saved variables. functions, list, data frames and so on are saved there
+7. Files: all files that are avaiable in your working directory
+8. Plots: You can see you plots
+9. Packages list of all packages downloaded from cran
+10. Help
+11. Viewer. 
+
+
+# Packages
+R has many additional packages 
+To use a package it needs to be installed. 
+You only need to install a package once.
+To use a package, you need to load the package each time you use R.
+
+
+# Installation
+Option 1. Use the install.packages function.
+Note that some packages rely on other packages.
+depencies = TRUE ensures that dependencies are also installed.
+```{r}
+# install.packages("psych", dependencies = TRUE)
+```
+Option 2. Use the package tab in R Studio
+Click install and enter package details
+
+Before we will start anything please dwonload the following packages:
+```{r eval=FALSE}
+install.packages("knitr", dep = T)
+install.packages("MASS", dep = T)
+install.packages("psych", dep = T)
+install.packages("stringr", dep = T)
+install.packages("gdata", dep = T)
+install.packages("gtools", dep = T)
+install.packages("xtable", dep = T)
+install.packages("xlsx", dep = T)
+install.packages("readxl", dep = T)
+install.packages("lattice", dep = T)
+install.packages("ggplot2", dep = T)
+install.packages("AER", dep = T)
+install.packages("devtools", dep = T)
+install.packages("tidyr", dep = T)
+install.packages("dplyr", dep = T)
+install.packages("Rcmdr", dep = T)
+install.packages("lmtest", dep = T)
+install.packages("markdown", dep = T)
+install.packages("rio", dependencies = T)
+
+library(devtools)
+install_github('jeromyanglim/personalityfacets')
+install_github('leeper/rio')
+```
+
+Loading an installed package
+Option 1. Use the library function
+```{r}
+library(psych) # I.e., put this at the start of your script
+```
+Option 2.
+Click on the package in Rstudio
+
+# Common errors
+Not having a package installed is a common error
+If you try to load a package that is not installed.
+e.g. 
+```{r}
+library(foo)
+```
+You will get an error
+This means:
+1. You mistyped the name of the package, or
+2. You need to install the package
+
+
+# Basic Arithmetic and Logical Operations
+```{r basic_multiplication}
+# You can use R like a calculator
+1 + 5 # addition
+10 - 7 # subtraction
+10 * 10 # multiplcation
+90 / 9 # division
+11 ^ 2 # exponentiation
+
+abs(-10) # absolute value
+ceiling(2.75) # round up to next integer
+floor(3.25) # round down to next integer
+sqrt(100) # square roots
+exp(2) # exponents
+pi # mathematical constant pi
+exp(1) # mathematical constant e
+log(100) # natural logs (i.e., base e)
+log(100, base= 10) # base 10 logs
+
+
+# Use parentheses to clarify order of operations
+(1 + 1 ) * 2
+1 + (1 * 2)
+
+# You can test for equality
+# TRUE and FALSE are keywords
+# T and F are synonyms
+TRUE
+FALSE
+1 == 2 # Equality (Return TRUE if equal)
+1 != 2 # Inequality (Return FALSE if unequal)
+10 > 9 # Greater than
+9 < 10 # Less than
+10 <= 10 # Less than or equal
+2 %in% c(1, 2 ,3) # is the number in the vector
+!(5>1)
+result <- 4<5
+result2 <- !(5>1) #is not (TRUE)
+result | result2 # result 1 or result 2 (because one of them is TRUE)
+result & result2 # result 1 and result 2 (because one is not true)
+isTRUE(result2)
+
+# TRUE and FALSE coerces to 1 and 0 respectively
+as.numeric(TRUE)
+as.numeric(FALSE)
+
+# Logical converting to 0, 1 is useful
+x <- c(2, 5 ,7 ,10, 15)
+x > 5
+sum(x > 5)  # sum of a 0-1 variable is a count
+mean(x > 5) # mean of a 0-1 variable is a proportion
+
+```
+
+# Basic language features
+Assignment:
+To assign values to a variable either use "<-" or "="
+"<-" is the more common convention R
+```{r basic language features, error = TRUE}
+x <- 1 + 1
+x
+```
+"=" is the common assignment operator in other programming languages. It does work in R, but is not the convention.
+```{r, error=TRUE}
+y = 1 + 1
+y
+```
+# Types of variables
+```{r Types of variables}
+# integer
+y <- 2L
+typeof(x)
+# but double
+y <- 2
+typeof(y)
+# It is because R read by default that you have 2.0 rather than 2. It is exactly why you need to type 2L. 
+# complex
+z <- 1i
+typeof(z)
+# but 
+z <- i
+typeof(z)
+# character
+a <- "apple"
+typeof(a)
+# logical
+b <- T
+typeof(b)
+c <- FALSE
+typeof(c)
+# but
+c <- False
+typeof(c)
+# creating a string
+greeting <- "Hello"
+name <- "world"
+message <- paste(greeting, name)
+message
+```
+
+### Variable name rules
+1. Variable names generally
++ Start with a letter (lower or uppercase)
++ Followed by letters, numbers, underscore (_), or period (.)
++ No spaces
+
+These do not work
+```{r, error=TRUE}
+my variable <- 1234
+1234variable <- 1234
+1234 <- 1234
+```
+This works
+```{r, error=TRUE}
+myvariable <- 1234
+my_variable <- 1234
+my_variable <- 1234
+myvariable123 <- 1234
+myVariable <- 1234
+my.variable <- 1234
+```
+R has many naming conventions
+As a matter of preference, style, and convenience, I prefer:
+1. Short but descriptive names
+
+* Less than 8 characters for names of lists and data.frames
+
+* Less than 15 characters for variables names in data.frames
+
+2. Use underscore to separate words within a variable name
+
+3. Avoid upper case letters
+
+
+Names starting with a period are hidden
+```{r, error=TRUE}
+.myvariable <- 1234
+ls()
+ls(all.names = TRUE)
+```
+
+### Spaces: 
+R will generally permits zero, one or more spaces between variables, operators, and other syntactic elements. However, appropriate and consistent spacing improves the readability of you scripts.
+[See Hadley Wickham's style guide](http://adv-r.had.co.nz/Style.html) 
+
+This is bad but works
+```{r, error=TRUE}
+x<-c(1,2,3,400)*2
+x<-    c (   1,2,3,      400)*   2
+```
+This is more readable:
+Add spaces after variables, operators, commas
+```{r, error=TRUE}
+x <- c(1, 2, 3, 400) * 2
+```
+
+Multipline line commands: Commands can generally span multiple lines as long as R does not think the command has finished 
+
+This works
+
+```{r, error=TRUE}
+x <- c("apple", 
+       "banana") 
+x
+y <- 10 + 
+    10  #this works
+y
+
+# This does not work
+y <- 10
+    + 10 
+y
+```
+
+
+Multiple commands on one line: You can include more than one command on one line by separat the commands by a semicolon. But generally, you should avoid doing this as it is not very readable.
+```{r, error=TRUE}
+x <- c(1, 2); y  <- c(3, 4); z <- rnorm(10)
+x;y;z
+```
+
+R is case sensitive
+```{r, error=TRUE}
+test <- "lower case"
+TEST <- "upper case"
+TEST 
+test # The original value was not lost
+     # because test is different to TEST
+Test # This variable does not exist
+
+Test <- "title case"
+Test
+```
+
+tip: It's often simpler to make variables lower case so that you don't have to think about case.
+
+# Understanding directories
+```{r directories}
+# R has a working directory.
+# This is important when loading and saving files to disk
+getwd() # show the current working directory
+```
+you can use setwd in R studio easily. Go to session -> set working directory
+In the Files you can see all folders available in your working directory
+
+
+Tips: 
+* Try to avoid spaces in file names (use hyphen or underscore instead)
+* If you do use spaces, then you'll need to escape the space with a slash  (e.g., ("my\ documents")
+* Use backslash as the directory separator 
+* Store all relevant files for a project within the project working directory
+
+Create some objects in the global environment
+```{r}
+x <- 1:10
+y <- 1:20
+data("mtcars")
+```
+
+Show objects in the global environment
+``` {r}
+ls() 
+```
+or look at the environment panel in RStudio
+
+### Saving objects
+Save all objects in the workspace
+```{r}
+save.image() 
+
+x <- 30
+y <- 1:10
+```
+Save specific named objects using save function.
+rdata or RData is the standard file exetnsion.
+
+### Removing objects:
+Removing named objects with the rm function
+```{r}
+rm(x)
+ls()
+rm(y, mtcars)
+```
+### Remove all objects from global workspace
+Option 1. Use the following command
+```{r}
+rm(list = ls())
+```
+Option 2. Click the broom object in RStudio Environment pane
+
+Let's remove x and change y
+```{r}
+rm(x) 
+y <- "changed"
+y
+```
+
+# Getting help
+```{r getting help}
+# Use question mark (i.e., ?) followed by command name
+# to lookup specific command
+?mean 
+help(mean) # or use help function
+
+# to look up package
+help(package = "MASS")
+
+# Press F1 in RStudio on the command name
+# mean 
+
+# Use double question mark to do a full-text search on R help
+??"factor analysis"
+
+# Search google
+# e.g., how to get the mean of a vector using r
+
+# Ask question on Stackoverflow with the R tag
+# http://stackoverflow.com/questions/tagged/r
+```
+
+# Importing data
+```{r reading data}
+# A simple option is to export data from your external data
+# in csv format and then import the data using csv
+# csv
+medals <- read.csv("data/practice/medals.csv")
+head(medals)
+tail(medals)
+dim(medals)
+
+# The read.table() can accept many different types of data separators (commas, tabs, spaces, pipes and others) and it has many options for controlling quoting and escaping data. 
+# Can read from local files or remote URLs. 
+# If a resource name ends with the .gz suffix, read.table() assumes the file has been compressed in gzip style and will automatically decompress it while reading. 
+# Load a data and store it in a new R data frame object called uciCar
+uciCar <- read.table(
+  'http://win-vector.com/dfiles/car.data.csv',
+  sep = ',',
+  header = T) # Tell R to expect a header line that defines the data column names
+  # colClasses = c('factor', 'factor', rep('integer', 2), rep('factor', 3)) # you can specify what kind of variables you have
+  # na.strings = 'NA'
+# class() tell what type of object you have. 
+class(uciCar)
+# summary() gives you a summary of almost any R object
+summary(uciCar)
+# For data frames, the command dim() show you how many rows and comlumns are in the data
+dim(uciCar)
+# install the data set from URL source
+d <- read.table(
+  'http://archive.ics.uci.edu/ml/machine-learning-databases/statlog/german/german.data',
+  sep='',
+  stringsAsFactors = F,
+  header = F)
+print(d[1:3,])
+# change column names to something meaningful
+colnames(d) <- c('Status.of.existing.checking.account',
+    'Duration.in.month','Credit.history','Purpose',
+    'Credit.amount','Savings.account.bonds',
+    'Present.employment.since',
+    'Installment.rate.in.percentage.of.disposable.income',
+    'Personal.status.and.sex','Other.debtors.guarantors',
+    'Present.residence.since','Property','Age.in.years',
+    'Other.installment.plans','Housing',
+    'Number.of.existing.credits.at.this bank','Job',
+    'Number.of.people.being.liable.to.provide.maintenence.for',
+    'Telephone','foreign.worker','Good.Loan')
+d&Good.Loan <- as.factor(ifelse(d$Good.Loan=1, 'GoodLoan', 'BadLoan'))
+print(d[1:3,])
+
+# Other delimited formats
+medals <- read.table("data/practice/medals.tsv", sep ="\t")
+
+# Read Excel: 
+# Read xls files using xls
+# Requires that Perl is installed and on the path
+# You may need to install Perl if on Windows
+# https://www.perl.org/get.html
+# library(gdata) 
+# medals <- gdata::read.xls("data/practice/medals.xls")
+
+# requires Java
+# library(xlsx)
+# x <- xlsx::read.xlsx("data/practice/medals.xlsx", sheetIndex = 1)
+
+# More recent package that has no dependencies on external packages 
+# readxl
+library(readxl)
+medals <- readxl::read_excel("data/practice/medals.xls")
+medals <- readxl::read_excel("data/practice/medals.xlsx")
+
+
+# SPSS
+library(foreign)
+cas <- foreign::read.spss("data/practice/cas.sav", to.data.frame = TRUE)
+attr(cas, "variable.labels")
+# tip: You may need to think about value labels in your SPSS file
+# Specifically, if you have numeric variables that have variable labels, you may
+# want to remove the value labels in SPSS or 
+
+# import stata
+?read.dta
+?read.sas
+
+
+# General purpose packages 
+# The haven package also can read and write SPSS, SAS, and Stata files
+
+# rio package: General purpose import and export
+# General purpose import and export tools
+# It's a fairly new package so there may still be a few bugs.
+# https://github.com/leeper/rio
+# github version is currently a little bit ahead of the CRAN version
+library(rio)
+cas <- rio::import(file="data/practice/cas.sav")
+rio::export(cas, file="output/cas.xlsx")
+medals <- rio::import(file="data/practice/medals.csv")
+
+# Use ProjectTemplate to auto-import (see discussion later)
+```
+
+# Exporting data 
+```{r exporting data}
+mydata <- data.frame(a = c(1,2,3), b = c("a", "b", "c"))
+
+# Interal R format
+# Good option if you need to re-open data in R
+save(mydata, file="output/mydata.rdata")
+#  load("output/mydata.rdata")
+
+
+# csv
+# Good option if you need to get data into other software
+# This should open in almost all other software (e.g. Excel, SPSS, etc.)
+write.csv(mydata, file = "output/mydata.csv")
+write.csv(mydata, file = "output/mydata-2.csv", row.names = FALSE) # exclude row.names
+
+# If you need more flexibility in terms of delimiters, etc.
+write.table(mydata, file = "output/mydata.tsv", sep = "\t") # e.g., tab delimiter
+
+# Exporting to other formats
+# There are a range of options for exporting to other formats
+# Functionality is often spread around
+# Given that the csv option is usually sufficient
+library(foreign)
+?foreign::write.foreign  # options for exporting to SAS, SPSS, and Stata directly
+
+?rio::export
+```

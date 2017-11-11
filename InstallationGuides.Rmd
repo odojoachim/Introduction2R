@@ -1,0 +1,54 @@
+---
+title: "Installation guides"
+author: "Marta Fajlhauer"
+date: "11 November 2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Thank you for joining us on the workshop Intro2R in Queen Mary UoL. There will be 4 sessions that will cover different elements of basic programming in R language. We are here to help you learn very likely your first programming language. Joy will help you with installation process on Mac and I will help you with Windows. 
+
+We'd like to take this opportunity to tell you about pre-workshop set up needed for starting your adventure with R and R studio. If you have any question please ask us. There is no such thing as a stupid question, it is highly likely that we have made things more complicated than needed and there is a lot to take on board. If you were not successful to follow the instruction don't worry we will help you in the first workshop. 
+
+
+At the workshop, you will follow up instruction from the already prepared material followed by questions to let you practice what you have learned on the day. 
+.
+For the workshop, you will need to install R and Rstudio, download Git and register for an account on GitHub if you don't have one already
+
+# Installing Git
+
+1. $\textbf{Windows}$
+
+You can download Git from https://git-scm.com/. You can hit "next" on all steps except for one; in the fifth step entitled "Adjusting your PATH environment", choose "Use Git and optional Unix tools from the Windows Command Prompt" (the bottom option). Other than that, the defaults are fine. Checkout Windows-style, commit Unix-style line endings is good.
+Do not forget to restart the command prompt or PowerShell after the installation finished successfully. 
+
+2. $\textbf{Mac}$
+Download Git from  https://git-scm.com/ and follow instructions. 
+
+# Registration for GitHub account
+
+Go to https://github.com/ and sign up for a new, free user account.
+
+# Install R and R studio
+
+1. Download R from http://cran.us.r-project.org/.
+2. Click on Download R for Windows. Click on base. Click on Download R 3.3.2 for Windows (or a newer version that appears).
+3. Install R. Leave all default settings in the installation options.
+4. Download RStudio Desktop for windows from http://rstudio.org/download/desktop (it should be install be called something like RStudio 1.0.136 Windows Vista/7/8/10). Choose default installation options.
+5. Open RStudio
+
+# Take materials needed for the workshop
+Login to your GitHub account. Go to the repository page: https://github.com/odojoachim/Intro2R. In a middle of the screen on the right side, you have a green window: clone or download. Choose download Zip and store on a computer in a chosen file. Unzip the files
+
+# Setup working directory for the session:
+In R studio in a toolbar select session -> set working directory -> choose the directory and choose the file where you have downloaded unzipped files. 
+
+# Remarks:
+
+A few more remarks: 
+1. First 30 minutes on the workshop 1 will be installation clinic to be sure that we all have the resources needed and all packages installed. 
+2. If you appreciate our work an/or like our workshop please give a star on the GitHub page
+3. Due to popularity of our workshop we will check your name before start. We have many people on the waiting list that couldn't come this afternoon because of room size. We would like to know if there will be a space for anyone on the waiting list on the next workshop. 

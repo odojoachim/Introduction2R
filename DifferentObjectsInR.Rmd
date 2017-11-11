@@ -1,0 +1,407 @@
+---
+title: "Different objects in R"
+author: "Marta Fajlhauer"
+date: "15 October 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Vectors
+```{r data types}
+# In R, a single value (scalar) is a vector.
+x <- 1 # I.e., x is a vector of length 1
+
+
+# In addition to importing data,
+# R has various functions for creating vectors.
+c(1, 2, 3, 4) # c stands for combine
+1:10 # create an integer sequence 1 to 10
+seq(1, 10) # alternative way of creating a sequence 
+seq(1, 10, by = 2) # The function has additional options
+seg(from=0, to=3, by=0.5) #length not specified. 
+seq(from=0, by=0.5, length.out=7) #end not specified
+seq(from=0, to=3, lenthg.out=7) #increment not specified
+ABC =c("A", "B", "C") #define a vector for replication
+
+rep(1, 5) # repeat a value a certain number of times
+rep(c(1,2,3), 5) # repeat a value a certain number of times
+rep(ABC, 2)
+rep(ABC, times=c(4,2,1))
+rep(ABC, each=2)
+rep(ABC, each=2, length=10)
+rep(ABC, each=2, times=c(1,2,3,1,2,3)) #each=2 argument was applied firstcreating the vector which has six components. adfter that times argument was applied. 
+# getting elements of a vector
+
+x = c(2.718, 3.14, 1.414, 47405) #define the vector
+z = c(3.45, 2.67)
+w = x+z # vector w was created by replicating the z vector 2 times
+names(x)= c("e", "pi", "sqrt2", "zipcode") #name the components
+x[c(2,4)] #which indices to include
+x[c(-1, -3)] #which indices to exclude
+x[c("pi", "zipcode")] #names of indices to include
+x <- c(FALSE, TRUE) # logical vector
+y <- c("a", "b", "cat", "dog") # character vector
+z1 <- c(100, 1, 2, 3) # numeric integer vector
+z2 <- c(100.2, 0.4, 0.9) # numeric real/double vector
+class(x);  typeof(x); mode(x)
+class(y);  typeof(y); mode(y)
+class(z1);  typeof(z1); mode(z1)
+class(z2);  typeof(z2); mode(z2)
+
+# Checking type of object
+is.logical(c(TRUE, TRUE))
+is.numeric(c("a", "b"))
+is.character(c(1, 2, 3))
+
+# Conversion of Types:
+as.character(c(1, 2, 3, 4))
+as.numeric(c("1", "2a", "3", "four"))
+as.numeric(c(FALSE, FALSE, TRUE, TRUE))
+
+# R often performs conversions implicitly
+sum(c(FALSE, TRUE, TRUE)) # converts logical to 0, 1 numeric
+paste0("v", c(1, 2, 3)) # converts numeric vector to character
+```
+
+### Sample:
+```{r basic data structures}
+
+# as well as many simulation functions which we'll cover later
+# Initial examples:
+# Sample 10 items with replacement from 
+sample(x = c("happy", "funny", "silly"), size = 10, replace = TRUE)
+
+# Sample 20 values from a normal distribution
+y <- rnorm(n = 20, mean = 0, sd = 1) 
+hist(y) # show values in histogram
+
+
+# Vectors can have names
+x <- c(1,2,3,4,5)
+names(x) <- c("a", "b", "c", "d", "e")
+x
+
+# Extracting vectors
+x[c(1,2)] # by numeric position
+x[x < 3] # by logical vector
+x[c("b", "c")] # by name
+```
+
+### Factors
+```{r}
+# Factors are a type of vector in R for which the elements are categorical values that could also be ordered. The values are stored internally as integers with labeled levels. 
+x= c("high", "medium", "low", "high", "medium")
+xf = factor(x) #Notice that R extracted "levels" from the vector and listed them after the contents of the factor. By defaUlt it ordered the levels alphbetically. 
+as.numeric (xf) #show factors as numeric vectors
+xfo = factor(x, levels=c("low", "medium", "high"), ordered = TRUE) #specify a particular order for the levels
+as.numeric(xfo)
+# reordering the levels of a factor that has already been created. 
+x= c("high", "medium", "low", "high", "medium")
+xf = factor(x)
+xf 
+# Now we reorder the levels by applying the factor function to the existing factor xf:
+xf = factor(xf, level =c("low", "medium", "high"), ordered = TRUE)
+xf
+# But for resulting output, the levels can be relabeled to whatever might be more meaningful for the application, e.g.
+xfol = factor (x, levels=c("low", "medium", "high"), ordered = TRUE,
+               labels=c("Bottom SES", "Middle SES", "Top SES"))
+xfol
+# it is important to know that that relabeling the levels does not change their order or their integer coding.
+```
+### Matrices:
+All data must be of same type (e.g., numeric, character, logical)
+```{r}
+# A matirx is a two-dimensional array of values of the same type. 
+matrix(1:6, ncol=3) # contents are 1:6, filled by column. 
+matrix(1:6, nrow=2) # or you can specify number of rows. 
+matrix(1:6, nrow=2, byrow=TRUE) # filled by row instead of by column 
+x = matrix(1:6, nrow=2, 
+       dimnames=list(TheRowDimName = c("Row1Name", "Row2Name"),
+                     TheColDimName = c("Col1Name", "Col2Name", "Col3Name")))
+# The components of matrices can be accessed via their indices or their names. The first index refers to the row and the second refer to the columns. 
+x[2,3]
+x["Row2Name", "Col3Name"]
+x[2, 1:3] # specify a range of columns
+x[2,]
+x[,3]
+y <- matrix(c(1, 2, 
+             4, 5, 
+             7, 8 ),
+           byrow = TRUE, ncol = 2)
+y
+
+class(y)
+
+dim(y)  # Number of rows and columns
+nrow(y) # Number of rows
+ncol(y) # Number of columns
+
+# Rows and columns can be given names
+rownames(y) <- c("a", "b", "c")
+colnames(y) <- c("col1", "col2")
+
+# Rows and columns can be indexed
+y["a", ] # By rowname
+y[, "col1"] # By column name 
+y["a", "col1"] # By both
+
+y[c(1,2), ] # By row position
+y[,1] # By column position
+y[c(2,3), 2] # By column position
+```
+
+### Lists
+* Store arbitrary structures of one or more named elements.
+* Elements can be of different lengths
+* Lists can contain lists can be nested to create tree like structures
+* Lists are commonly used for representing results of analyses
+```{r)}
+MyList = list("a"=1:3, b=matrix(1:6, nrow=2), "c"="Hello, world")
+MyList$a #the content of the first list item named "a"
+MyList[[1]]
+MyList$a[2] #the second element of the list item named "a"
+MyList[[1]][2]
+w <- list(apple = c("a", "b", "c"), 
+          banana = c(1,2), 
+          carrot = FALSE,
+          animals = list(dog = c("dog1", "dog2"), 
+                         cat = c(TRUE, FALSE)))
+
+class(w)
+
+# Accessing one element of list
+w$apple # using dollar notation
+w[[1]] # by position
+w[["apple"]] # by name (double brackets)
+
+# Accessing subset of list
+w[c(1, 2)]  # by position (single bracket)
+w[c("apple", "banana")] # by name
+w[c(FALSE, FALSE, TRUE, TRUE)] # by logical vector
+
+# Quick illustration of a list object returned by
+# a statistical function
+
+# We'll simulate some data for two hypothetical groups x and y
+# and perform an independent samples t-test.
+x <- rnorm(10, mean = 0, sd = 1) 
+y <- rnorm(10, mean = 1, sd = 1)
+fit <- t.test(x, y)  
+
+# The function 
+class(fit) # class does not say list, but it is a list
+mode(fit)
+str(fit) # show structure of object
+names(fit) # show names of elements
+# we can view particular elements
+fit$statistic 
+fit$parameter
+fit$p.value
+# or extract subsets of the list
+fit[c("statistic", "parameter", "p.value")]
+```
+### Data Frames:
+* Data frames are the standard data strucure used for storing data. If you have used other software (e.g., SPSS, Excel, etc.), this is what you may think of as a "dataset".
+* Columns can be of different data types (e.g., character, numeric, logical, etc.)
+```{r}
+z <- data.frame(var1 = 1:9, var2 = letters[1:9])
+z
+```
+### Tip: 
+* Some functions work with matrices, some work with data.frames, and some work with both.
+* If you are wanting to store data like you might store in a database, then you'll generaly want a data.frame.
+* If you are dealing with a mathematical object that you you want to perform a mathematical operation on, then you generally want a matrix (e.g., correlation matrix, covariance matrix, distance matrix in MDS, matrices used for matrix algebra).
+
+# Working with data frames
+```{r exploring data frames}
+# Let's use the built-in survey data.frame dataset
+library(MASS)
+data(survey)
+?survey
+mydata <- na.omit(survey) # for simplicity I'll exclude missing data
+shortdata <- mydata[1:6, 1:5] 
+shortdata
+```
+### Extracting observations (i.e., rows) and variables (i.e., columns).
+There are similarities to matrices and lists
+Select observations
+```{r}
+shortdata[1:5, ] # by row number
+shortdata[c(5,4,3,2,1), ] # re-order
+shortdata[ shortdata$Sex == "Female", ] # by logical vector
+shortdata[c("1", "2"), ] # by rownames
+
+# Select variables 
+shortdata[, c(1,2)] # by position like a matrix
+shortdata[c(1,2)] # by position like a list
+shortdata[ ,c("Sex", "Fold")] # by name like a matrix
+shortdata[c("Sex", "Fold")] #
+shortdata$Sex # by name to get a single variable
+```
+
+### Names
+```{r}
+names(shortdata) # get variable names
+colnames(shortdata) # but this also works
+rownames(shortdata) # rows can also have names
+```
+#### Tip: 
+Avoid row names. Add another variable to the data.frame to store this information.
+
+
+### Examine first few rows
+```{r}
+head(mydata) # first 6 rows
+head(mydata, n = 10) # first 7 rows
+tail(mydata) # last few rows
+View(mydata) # Rstudio function to open data in viewer or click on the icon in the Environment pane
+
+# How many rows and columns?
+dim(mydata) # rows and column counts
+nrow(mydata) # row count
+ncol(mydata) # column count
+
+# Examine structure
+str(mydata)
+```
+
+### Functions
+# A function takes input values, called "arguments" and does something with them. In general a function in R is defined by code of the form:
+# functionName = function(arguments){commands}
+# When the function is called it takes the values of the arguments in parentheses and use them in the commands in the braces
+``` {r}
+asqplusb = function(a, b=1){
+  c=a^2+b
+  return(c)
+}
+asqplusb(a=3, b=2)
+# However arguments without explicit labels must be in the order used in the definition of the function
+asqplusb(3,2)
+asqplusb(2,3)
+```
+# The function definition gave argument b a default value of 1 by specifying b=1 in the list of arguments. This means that if the function is called 
+# without an explicit value for b provided, the default value will be used. The argument a was not given the default value, however, and must be always specified 
+# in a call to the function.
+# String functions
+```{r string functions}
+paste("hello", "how", "are", "You") # defaults to space separator
+paste0("hello", "how", "are", "You") # no separator
+paste("apple", "banana", "carrot", "date", sep =", ") # specify arbitrary separator
+paste0("v", 1:10) # paticularly useful with vectors
+
+# Extract substring
+substr("abcdefghijklmnop", 4, 6)
+
+# Change case
+toupper("abcd") # make upper case
+tolower("ABCD") # make lower case
+
+mystring <- c("apple", "banana", "carrot", "date", "egg", "fig")
+# Identify which strings match a pattern
+grep("a", mystring) # index of objects with "a"
+grep("a", mystring, value = TRUE) # value of objects with "a"
+
+# get count of number of characters
+nchar(mystring)
+data.frame(mystring, nchar(mystring))
+
+# Substitute a mystringreplacement text that matches a pattern
+questions <- c("How are you?", "What is going on?")
+gsub(" ", "_", questions) # replace space with underscore
+
+
+# R  string manipulation tools are very powerful
+# For more information see
+?grep
+?"regular expression"
+
+
+# see also Hadley Wickham's package for string manipulation
+# It attempts to introduce greater consistency in notation.
+# install.packages("stringr")
+library(stringr)
+help(package = "stringr")
+# all functions begin with str_
+str_length(mystring) # see nchar
+str_sub(mystring, start = 1, end = 3)
+
+
+# writing output to the console
+cat("Hello World!")
+
+# Tab is \t and new line is \n
+cat("Hello\t World\nSome more text")
+
+```
+
+### Loops
+
+We very raly use loops in R as in R much quicker is to use different packages or functions working in similar way as you want the loop to work in
+We will cover different types of loops but please bear in mind that structure of loop is important
+### while (logical expression){body of the loop}
+R will check the logical expression then R will execute whatever is in the body of the loop. It will continue until the logical expression is false. Then it will stop
+```{r while loop}
+while(FALSE){
+  print('Hello')
+} 
+```
+we shouldn't see anything as the logical statement is not TRUE
+while(TRUE){
+print('Hello')
+} This loop would continue forever till we want press the red stop button that we would see in  console
+Let see an example:
+```{r}
+counter <- 1
+while(counter < 12){
+  print(counter)
+  counter <- counter + 1
+}
+```
+#### for loop
+for (specify iteration for the loop){body of the loop}
+```{r}
+for (i in 1:5){
+  print('Hello R')
+}
+```
+### if loop
+if (logical expression but run only once){body of the loop}
+```{r}
+x <- rnorm(n = 1) # generate 1 random number from normal distribution with mean=0 and st.dev=0
+if(x >1){
+  answer <- 'Greater than 1'
+} # if answer variable not greater than x !> 1
+
+rm(x)
+x <- rnorm(n = 1)
+if(x >1){
+  answer <- print('Greater than 1')
+} else {
+  answer <- print('Less than 1')
+}# one or the other is executed
+
+rm(x)
+x <- rnorm(n = 1)
+if(x >1){
+  answer <- print('Greater than 1')
+} else {
+  if(x >= -1){
+    answer <- print('between -1 and 1')
+  } else{
+    answer <- print('less than -1')
+  }
+}
+# Below you have exactly the same loop as above only a little bit less confusing
+rm(answer, x)
+x <- rnorm(n=1)
+if(x > 1){
+  answer <- 'Greater than 1'
+} else if (x >= -1){
+  answer <- 'between -1 and 1'
+} else{
+  answer <- 'Less than 1'
+}
+```
